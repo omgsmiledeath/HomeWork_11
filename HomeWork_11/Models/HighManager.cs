@@ -12,8 +12,9 @@ namespace HomeWork_11.Models
             string lname, 
             string post, 
             byte age, 
-            DateTime emplDate) : base(fname, lname, post, age, emplDate)
+            DateTime emplDate,Department dep) : base(fname, lname, post, age, emplDate)
         {
+            Salary = CalcSalary(dep);
         }
 
         public override uint CalcSalary(Department dep)
@@ -32,7 +33,7 @@ namespace HomeWork_11.Models
                     }
                 }
             }
-            if(dep.Employees.Count!=0)
+            if(dep.Employees.Count>1)
                 foreach(var item in dep.Employees)
                 {
                     if (item != this) result += item.Salary;
