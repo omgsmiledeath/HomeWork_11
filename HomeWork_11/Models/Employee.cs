@@ -26,9 +26,7 @@ namespace HomeWork_11.Models
         private string post; // Должность сотрудника
         private DateTime employmentDate; //Дата приема на работу
         private byte age; //Возраст сотрудника
-        private long salary; //Зарплата сотрудника
-
-
+        private uint salary; //Зарплата сотрудника
 
         #endregion
 
@@ -61,7 +59,7 @@ namespace HomeWork_11.Models
         /// <summary>
         /// ID
         /// </summary>
-        public virtual string Id { get => id; set => id = value; }
+        public string Id { get => id; set => id = value; }
         /// <summary>
         /// Должность
         /// </summary>
@@ -72,11 +70,12 @@ namespace HomeWork_11.Models
         public byte Age { get => age; set => age = value; }
 
         public DateTime EmploymentDate { get => employmentDate; set => employmentDate = value; }
+        public uint Salary { get => salary; set => salary = value; }
 
         /// <summary>
         /// Свойство подсчета зарплаты
         /// </summary>
-        public abstract long CalcSalary();
+        public abstract uint CalcSalary(Department dep=null);
 
         public bool Equals(Employee other) => this.Id == other.Id;
         #endregion
