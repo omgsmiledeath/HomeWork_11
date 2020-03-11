@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace HomeWork_11.Models
 {
-    abstract class Employee
+    abstract class Employee : IEquatable<Employee>
     {
         #region Static поля и конструктор
         static protected List<string> IdList; // Список всех ID 
@@ -14,7 +15,7 @@ namespace HomeWork_11.Models
         static Employee()
         {
             IdList = new List<string>();
-            idCount = 1;
+            idCount = 0;
         }
         #endregion
 
@@ -23,38 +24,63 @@ namespace HomeWork_11.Models
         private string last_name; //Фамилия сотрудника
         private string id; // Уникальный ID сотрудника
         private string post; // Должность сотрудника
-        private DateTime employmentDate; //Дата приема на работу
+ 
         private byte age; //Возраст сотрудника
+        protected long salary; //Зарплата сотрудника
+
+
 
         #endregion
 
         #region Конструкторы
-        public Employee(string fname,string lname,string post,DateTime emplDate,byte age)
+        public  Employee(string fname,string lname,string post,byte age)
         {
             First_Name = fname;
             Last_Name = lname;
             Id = Guid.NewGuid().ToString().Substring(0, 5)+(++idCount);
             IdList.Add(Id);
             Post = post;
-            EmploymentDate = emplDate;
             Age = age;
+
+            IdList.Add(Id);
         }
 
-        public Employee() : this("John", "Doe","Уборщик",new DateTime(1900,01,01),18) { }
+        public Employee() : this("John", "Doe","Уборщик",18) { }
         #endregion
 
         #region Автосвойства
+        /// <summary>
+        /// Имя
+        /// </summary>
         public string First_Name { get => first_name; set => first_name = value; }
-        public string Last_Name { get => last_name; set => last_name = value; }
+        /// <summary>
+        /// Фамилия
+        /// </summary>
+        public string Last_Name { get => last_name; set => last_name = value; } 
+        /// <summary>
+        /// ID
+        /// </summary>
         public string Id { get => id; set => id = value; }
+        /// <summary>
+        /// Должность
+        /// </summary>
         public string Post { get => post; set => post = value; }
-        public DateTime EmploymentDate { get => employmentDate; set => employmentDate = value; }
+        /// <summary>
+        /// Возраст
+        /// </summary>
         public byte Age { get => age; set => age = value; }
+        /// <summary>
+        /// Свойство подсчета зарплаты
+        /// </summary>
+        public abstract long CalcSalary();
+
+        public bool Equals(Employee other)
+        {
+            return (this.Id == other.Id);
+        }
         #endregion
 
-        #region Свойства
 
-        #endregion
 
     }
 }
