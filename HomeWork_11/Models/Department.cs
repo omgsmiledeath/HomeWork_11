@@ -8,9 +8,11 @@ namespace HomeWork_11.Models
     class Department : INotifyPropertyChanged
     {
         #region Статические элементы
-        static protected ushort DepCount;
-        static protected List<string> DepNames;
-
+        static protected ushort DepCount; //количество департаментов 
+        static protected List<string> DepNames; //лист названий департаментов
+        /// <summary>
+        /// Конструктор для статических переменных
+        /// </summary>
         static Department()
         {
             DepCount = 0;
@@ -19,32 +21,24 @@ namespace HomeWork_11.Models
         #endregion
 
 
-        private ObservableCollection<Employee> employees;
-        private ObservableCollection<Department> departments;
-        private string id;
-        private string departmentName;
-
+        private ObservableCollection<Employee> employees; //список сотрудников в департаменте
+        private ObservableCollection<Department> departments; //вложенные департаменты
+        private string id; //ID департамента
+        private string departmentName; //название департамента
+        /// <summary>
+        /// Конструктор департамента
+        /// </summary>
+        /// <param name="name">Название</param>
         public Department(string name)
         {
-            Employees = new ObservableCollection<Employee>();
-            Departments = new ObservableCollection<Department>();
+            employees = new ObservableCollection<Employee>();
+            departments = new ObservableCollection<Department>();
             DepartmentName = name;
             Id = Guid.NewGuid().ToString().Substring(0, 5) + (++DepCount);
         }
 
-        ObservableCollection<Employee> Employees { get => employees; set
-            {
-                employees = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Employees)));
-            }
-        }
-        ObservableCollection<Department> Departments { get => departments;
-            set
-            {
-                departments = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Departments)));
-            }
-        }
+        ObservableCollection<Employee> Employees { get => employees;}
+        ObservableCollection<Department> Departments { get => departments;}
 
         public string Id { get => id; set => id = value; }
 
@@ -53,7 +47,8 @@ namespace HomeWork_11.Models
 
         public void AddSubDepartment(Department dep)
         {
-
+            Departments.Add(dep);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Departments)));
         }
 
         public void AddWorker(Employee newWorker)

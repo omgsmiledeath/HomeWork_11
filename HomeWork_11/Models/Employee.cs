@@ -24,20 +24,21 @@ namespace HomeWork_11.Models
         private string last_name; //Фамилия сотрудника
         private string id; // Уникальный ID сотрудника
         private string post; // Должность сотрудника
- 
+        private DateTime employmentDate; //Дата приема на работу
         private byte age; //Возраст сотрудника
-        protected long salary; //Зарплата сотрудника
+        private long salary; //Зарплата сотрудника
 
 
 
         #endregion
 
         #region Конструкторы
-        public  Employee(string fname,string lname,string post,byte age)
+        public  Employee(string fname,string lname,string post,byte age,DateTime emplDate)
         {
             First_Name = fname;
             Last_Name = lname;
             Id = Guid.NewGuid().ToString().Substring(0, 5)+(++idCount);
+            EmploymentDate = emplDate;
             IdList.Add(Id);
             Post = post;
             Age = age;
@@ -45,7 +46,7 @@ namespace HomeWork_11.Models
             IdList.Add(Id);
         }
 
-        public Employee() : this("John", "Doe","Уборщик",18) { }
+        public Employee() : this("John", "Doe","Уборщик",18,DateTime.Now) { }
         #endregion
 
         #region Автосвойства
@@ -60,7 +61,7 @@ namespace HomeWork_11.Models
         /// <summary>
         /// ID
         /// </summary>
-        public string Id { get => id; set => id = value; }
+        public virtual string Id { get => id; set => id = value; }
         /// <summary>
         /// Должность
         /// </summary>
@@ -69,15 +70,15 @@ namespace HomeWork_11.Models
         /// Возраст
         /// </summary>
         public byte Age { get => age; set => age = value; }
+
+        public DateTime EmploymentDate { get => employmentDate; set => employmentDate = value; }
+
         /// <summary>
         /// Свойство подсчета зарплаты
         /// </summary>
         public abstract long CalcSalary();
 
-        public bool Equals(Employee other)
-        {
-            return (this.Id == other.Id);
-        }
+        public bool Equals(Employee other) => this.Id == other.Id;
         #endregion
 
 
