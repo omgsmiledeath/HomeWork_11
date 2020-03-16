@@ -40,7 +40,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" HorizontalAlignment="Left">Пользователь</TextBlock>
+                        <TextBlock Grid.Row="0" HorizontalAlignment="Left" Text="{Binding Post}" />
                         <TextBlock Grid.Row="1" Text="{Binding Last_Name}" Margin="2 2 2 0"
                                    FontSize="15" HorizontalAlignment="Right"  />
                         <TextBlock Grid.Row="2" Text="{Binding Id}" HorizontalAlignment="Right" 

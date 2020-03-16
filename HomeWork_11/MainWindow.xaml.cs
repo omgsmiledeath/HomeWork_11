@@ -45,22 +45,23 @@ namespace HomeWork_11
             organization.AddSubDepartment(new Department("Отдел МТО"));
             
             organization.AddSubDepartment(new Department("Отдел МТО2"));
-            foreach(var item in organization.Departments)
-            {
-                item.AddWorker(new Manager());
-                item.AddWorker(new Manager());
-                item.AddWorker(new Manager());
-                item.AddSubDepartment(new Department("Отдел Олега"));
-
-            }
+            
             
             organization.AddSubDepartment(new Department("Отдел МТО3"));
             organization.AddSubDepartment(new Department("Отдел МТО4"));
             organization.AddSubDepartment(new Department("Отдел МТО5"));
             organization.AddSubDepartment(new Department("Отдел МТО6"));
             organization.AddSubDepartment(new Department("Отдел МТО7"));
-
-
+            foreach (var item in organization.Departments)
+            {
+                item.AddWorker(new Manager());
+                item.AddWorker(new Manager());
+                item.AddWorker(new Manager());
+                item.AddSubDepartment(new Department("Отдел Олега"));
+                item.Departments[0].AddWorker(new Manager());
+                
+            }
+            organization.Departments[1].Departments[0].AddSubDepartment(new Department("Еще отдел олега"));
 
             // OrganizationTree.Items.Add(organization);
             // MessageBox.Show($"{organization.GetDepartmens().Count}");
@@ -69,7 +70,7 @@ namespace HomeWork_11
                 Header = organization,
                 DataContext = organization
             };
-            //mainItem.Selected += OrganizationTree_Selected;
+            mainItem.Selected += OrganizationTree_Selected;
             OrganizationTree.Items.Add(mainItem);
             foreach (var item in organization.GetDepartmens())
             {
@@ -111,7 +112,7 @@ namespace HomeWork_11
                         var newItem = new TreeViewItem()
                         {
                             Header = subdep,
-                            Tag = subdep
+                            DataContext = subdep
                         };
 
                         newItem.Items.Add(null);
