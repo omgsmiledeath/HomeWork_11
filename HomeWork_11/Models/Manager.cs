@@ -24,6 +24,12 @@ namespace HomeWork_11.Models
             PaymentForHour = paymentForHour;
         }
 
+        public Manager() :base()
+        {
+            WorkHour = 30;
+            paymentForHour = 3;
+            Salary = CalcSalary();
+        }
 
 
         public ushort WorkHour { get => workHour; set => workHour = value; }

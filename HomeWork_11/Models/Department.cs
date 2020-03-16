@@ -37,8 +37,8 @@ namespace HomeWork_11.Models
             Id = Guid.NewGuid().ToString().Substring(0, 5) + (++DepCount);
         }
 
-        internal ObservableCollection<Employee> Employees { get => employees;}
-        internal ObservableCollection<Department> Departments { get => departments;}
+        public ObservableCollection<Employee> Employees { get => employees;}
+        public ObservableCollection<Department> Departments { get => departments;}
 
         public string Id { get => id; set => id = value; }
 
@@ -58,6 +58,7 @@ namespace HomeWork_11.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Employees)));
         }
 
+        public ObservableCollection<Department> GetDepartmens() => departments;
 
 
         public event PropertyChangedEventHandler PropertyChanged;
