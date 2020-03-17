@@ -1,0 +1,37 @@
+﻿<Window x:Class="HomeWork_11.AddEmployee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeWork_11"
+        mc:Ignorable="d"
+        Title="AddEmployee" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <TextBox x:Name="LnameBox"
+                     HorizontalAlignment="Center" 
+                     Margin="312,20,306,0" Width="174"/>
+            <TextBox x:Name="FnameBox"
+                     HorizontalAlignment="Center" 
+                     Margin="312,20,306,0" Width="174"/>
+            <TextBox x:Name="PostBox"
+                     HorizontalAlignment="Center" 
+                     Margin="312,20,306,0" Width="174"/>
+            <TextBox x:Name="AgeBox"
+                     HorizontalAlignment="Center" 
+                     Margin="312,20,306,0" Width="174"/>
+            
+            <TextBox x:Name="WorkHBox"
+                     HorizontalAlignment="Center" 
+                     Margin="312,20,306,0" Width="174"/>
+            <TextBox x:Name="PaymentBox"
+                     HorizontalAlignment="Center" 
+                     Margin="312,20,306,0" Width="174"/>
+            <DatePicker x:Name="EmplDateBox" Margin="0,20,0,0"
+                        HorizontalAlignment="Center">
+            </DatePicker>
+            <Button x:Name="AddEmployeeButton" Margin="50,20,50,0"
+                    Content="Добавить сотрудника" Click="AddEmployee_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

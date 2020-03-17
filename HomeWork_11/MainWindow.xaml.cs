@@ -22,7 +22,7 @@ namespace HomeWork_11
     public partial class MainWindow : Window
     {
         private Department organization;
-        private Department curDep;
+        
         #region Конструктор
         /// <summary>
         /// При запуске приложения
@@ -136,10 +136,25 @@ namespace HomeWork_11
             var item = (TreeViewItem)e.OriginalSource;
             var dep = (Department)item.DataContext;
             ListBox1.ItemsSource = dep.Employees;
-            curDep = dep;
+           
             //dep.AddWorker(new Manager());
-            txt1.DataContext = dep.DepartmentName;
+            txt1.DataContext = dep;
             //OrganizationTree.Tag = item.DataContext;
+        }
+
+        private void AddWorkerButton_Click(object sender, RoutedEventArgs e)
+        {
+            Department dep = new Department(null);
+            if((Department) txt1.DataContext is Department)
+            {
+                dep = (Department)txt1.DataContext;
+            }
+
+            AddEmployee AddPageEmpl = new AddEmployee(dep)
+            {
+                Owner = this
+            };
+            AddPageEmpl.Show();
         }
     }
 }

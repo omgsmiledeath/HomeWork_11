@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace HomeWork_11.Models
 {
-    abstract class Employee : IEquatable<Employee>
+    public abstract class Employee : IEquatable<Employee>
     {
         #region Static поля и конструктор
         static protected List<string> IdList; // Список всех ID 

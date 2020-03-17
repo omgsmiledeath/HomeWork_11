@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace HomeWork_11.Models
 {
-    class Department : INotifyPropertyChanged
+    public class Department : INotifyPropertyChanged
     {
         #region Статические элементы
         static protected ushort DepCount; //количество департаментов 
