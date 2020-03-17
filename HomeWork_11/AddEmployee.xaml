@@ -5,29 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeWork_11"
         mc:Ignorable="d"
-        Title="AddEmployee" Height="450" Width="800">
+        Title="Добавление сотрудника в отдел" Height="450" Width="800">
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <TextBox x:Name="LnameBox"
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="183"/>
+            <ColumnDefinition Width="181*"/>
+
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <TextBlock Margin="5,8,5,5">Фамилия</TextBlock>
+            <TextBlock Margin="5,8,5,5" >Имя</TextBlock>
+            <TextBlock Margin="5,8,5,5" >Пост</TextBlock>
+            <TextBlock Margin="5,8,5,5" >Возраст</TextBlock>
+            <TextBlock Margin="5,8,5,5" >Количество рабочих часов</TextBlock>
+            <TextBlock Margin="5,8,5,5" >Оплата за час</TextBlock>
+            <TextBlock Margin="5,8,5,5" >Дата приема на работу</TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" 
+                    Grid.Column="1">
+            <TextBox x:Name="LnameBox" 
                      HorizontalAlignment="Center" 
-                     Margin="312,20,306,0" Width="174"/>
+                     Margin="5,5,5,5" 
+                     Width="174"/>
             <TextBox x:Name="FnameBox"
                      HorizontalAlignment="Center" 
-                     Margin="312,20,306,0" Width="174"/>
+                      Width="174"
+                     Margin="5,5,5,5"/>
             <TextBox x:Name="PostBox"
                      HorizontalAlignment="Center" 
-                     Margin="312,20,306,0" Width="174"/>
+                      Width="174"
+                     Margin="5,5,5,5"/>
             <TextBox x:Name="AgeBox"
                      HorizontalAlignment="Center" 
-                     Margin="312,20,306,0" Width="174"/>
-            
+                      Width="174"
+                     Margin="5,5,5,5"/>
             <TextBox x:Name="WorkHBox"
                      HorizontalAlignment="Center" 
-                     Margin="312,20,306,0" Width="174"/>
+                      Width="174"/>
             <TextBox x:Name="PaymentBox"
                      HorizontalAlignment="Center" 
-                     Margin="312,20,306,0" Width="174"/>
-            <DatePicker x:Name="EmplDateBox" Margin="0,20,0,0"
+                      Width="174"/>
+            <DatePicker x:Name="EmplDateBox" Margin="0,5,0,0"
                         HorizontalAlignment="Center">
             </DatePicker>
             <Button x:Name="AddEmployeeButton" Margin="50,20,50,0"

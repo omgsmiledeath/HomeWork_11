@@ -31,6 +31,19 @@ namespace HomeWork_11
 
         private void AddEmployee_Click(object sender, RoutedEventArgs e)
         {
+
+            Employee result = getManager();
+            Dep.AddWorker(result);
+            this.Close();
+        }
+
+
+        /// <summary>
+        /// Метод для получения данных и формирования экземпляра класса Менеджер
+        /// </summary>
+        /// <returns></returns>
+        private Employee getManager()
+        {
             string fname = LnameBox.Text;
             string lname = FnameBox.Text;
             string post = PostBox.Text;
@@ -39,8 +52,23 @@ namespace HomeWork_11
             ushort payment = Convert.ToUInt16(PaymentBox.Text);
             DateTime empldate = Convert.ToDateTime(EmplDateBox.Text);
 
-            Dep.AddWorker(new Manager(fname, lname, post, age, empldate, workHour, payment));
-            this.Close();
+            return new Manager(fname, lname, post, age, empldate, workHour, payment);
+        }
+        /// <summary>
+        /// Метод для получения данных и формирования экземпляра класса Интерн
+        /// </summary>
+        /// <returns></returns>
+        private Employee getInternt()
+        {
+            return null;
+        }
+        /// <summary>
+        /// Метод для получения данных и формирования экземпляра класса Топ Менеджер
+        /// </summary>
+        /// <returns></returns>
+        private Employee getHighManager()
+        {
+            return null;
         }
     }
 }
