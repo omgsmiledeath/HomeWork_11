@@ -27,6 +27,7 @@ namespace HomeWork_11
             this.Dep = dep;
         }
 
+
         internal Department Dep { get => dep; set => dep = value; }
 
         private void AddEmployee_Click(object sender, RoutedEventArgs e)
@@ -70,5 +71,7 @@ namespace HomeWork_11
         {
             return null;
         }
+
+
     }
 }

@@ -67,27 +67,44 @@ namespace HomeWork_11
             // MessageBox.Show($"{organization.GetDepartmens().Count}");
             var mainItem = new TreeViewItem
             {
-                Header = organization,
+                Header = organization.DepartmentName,
                 DataContext = organization
             };
             mainItem.Selected += OrganizationTree_Selected;
+            mainItem.Expanded += mainorg_expanded;
+            //mainItem.Items.Add(null);
             OrganizationTree.Items.Add(mainItem);
+                      
+           
+        }
+
+        private void mainorg_expanded(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem mainItem = (TreeViewItem) e.OriginalSource;
             foreach (var item in organization.GetDepartmens())
             {
                 var trItem = new TreeViewItem
                 {
-                    Header = item,
+                    Header = item.DepartmentName,
                     DataContext = item
-                };               
+                };
                 if (item.Departments.Count > 0)
                 {
                     trItem.Items.Add(null);
                 }
                 trItem.Expanded += org_expanded;
                 trItem.Selected += OrganizationTree_Selected;
+                trItem.Collapsed += org_colapsed;
                 mainItem.Items.Add(trItem);
-            }            
-           
+            }
+        }
+            private void org_colapsed(object sender, RoutedEventArgs e)
+        {
+            TreeViewItem item = (TreeViewItem)e.Source;
+            //if (item.Items.Count == 0)
+                item.Items.Refresh();
+            item.Items.Clear();
+            item.Items.Add(null);
         }
 
         private void org_expanded(object sender, RoutedEventArgs e)
@@ -103,23 +120,21 @@ namespace HomeWork_11
             Department dep = (Department)item.DataContext;
             
             item.Items.Clear();
-           
-
 
                 if(dep.Departments.Count>0)
                 foreach (var subdep in dep.GetDepartmens())
                 {
                         var newItem = new TreeViewItem()
                         {
-                            Header = subdep,
+                            Header = subdep.DepartmentName,
                             DataContext = subdep
                         };
 
-                        newItem.Items.Add(null);
+                    newItem.Items.Add(null);
                     item.Items.Add(newItem);
                     newItem.Expanded += org_expanded;
-                        newItem.Selected += OrganizationTree_Selected;
-                        
+                    newItem.Selected += OrganizationTree_Selected;
+                    newItem.Collapsed += org_colapsed;
                 }
            
             
@@ -155,6 +170,18 @@ namespace HomeWork_11
                 Owner = this
             };
             AddPageEmpl.Show();
+        }
+
+        private void AddDepartment_Click(object sender, RoutedEventArgs e)
+        {
+            Department dep = new Department(null);
+            if ((Department)txt1.DataContext is Department)
+            {
+                dep = (Department)txt1.DataContext;
+            }
+            dep.AddSubDepartment(new Department("Новый"));
+            MessageBox.Show(dep.DepartmentName);
+            
         }
     }
 }
