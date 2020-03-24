@@ -14,25 +14,27 @@
 
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <ComboBox x:Name="EmplTypes" 
-                      SelectionChanged="EmplTypes_SelectionChanged">
+            <ComboBox x:Name="EmplTypes" DropDownClosed="EmplTypes_DropDownClosed">
                 <TextBlock Text="Интерн"/>
                 <TextBlock Text="Менеджер"/>
                 <TextBlock Text="Высший менеджер"/>
             </ComboBox>
-            <TextBlock Margin="5,8,5,5">Фамилия</TextBlock>
-            <TextBlock Margin="5,8,5,5" >Имя</TextBlock>
-            <TextBlock Margin="5,8,5,5" >Пост</TextBlock>
-            <TextBlock Margin="5,8,5,5" >Возраст</TextBlock>
-            <TextBlock Margin="5,8,5,5" >Количество рабочих часов</TextBlock>
-            <TextBlock Margin="5,8,5,5" >Оплата за час</TextBlock>
-            <TextBlock Margin="5,8,5,5" >Дата приема на работу</TextBlock>
+            <TextBlock Margin="5,15,0,5" HorizontalAlignment="Left" Width="173" Height="21">Фамилия</TextBlock>
+            <TextBlock Margin="5,15,5,5" >Имя</TextBlock>
+            <TextBlock Margin="5,15,5,5" >Пост</TextBlock>
+            <TextBlock Margin="5,10,5,5" >Возраст</TextBlock>
+            <TextBlock Margin="5,15,5,5" >Количество рабочих часов</TextBlock>
+            <TextBlock Margin="5,15,5,5" >Оплата за час</TextBlock>
+            <TextBlock Margin="5,15,5,5" >Дата приема на работу</TextBlock>
+            <TextBlock Margin="5,15,5,5" >Конец интернатуры</TextBlock>
         </StackPanel>
         <StackPanel Orientation="Vertical" 
                     Grid.Column="1">
+            <TextBlock Text="Добавление сотрудника" 
+                       HorizontalAlignment="Center" FontSize="25"/>
             <TextBox x:Name="LnameBox" 
                      HorizontalAlignment="Center" 
-                     Margin="5,5,5,5" 
+                     Margin="5,10,5,5" 
                      Width="174"/>
             <TextBox x:Name="FnameBox"
                      HorizontalAlignment="Center" 
@@ -48,13 +50,16 @@
                      Margin="5,5,5,5"/>
             <TextBox x:Name="WorkHBox"
                      HorizontalAlignment="Center" 
-                      Width="174"/>
+                      Width="174"
+                     Margin="5,5,5,5"/>
             <TextBox x:Name="PaymentBox"
                      HorizontalAlignment="Center" 
+                     Margin="5,5,5,5"
                       Width="174"/>
             <DatePicker x:Name="EmplDateBox" Margin="0,5,0,0"
-                        HorizontalAlignment="Center">
-            </DatePicker>
+                        HorizontalAlignment="Center"/>
+            <DatePicker x:Name="EndOfInternDate" Margin="0,5,0,0"
+                        HorizontalAlignment="Center" Visibility="Hidden"/>
             <Button x:Name="AddEmployeeButton" Margin="50,20,50,0"
                     Content="Добавить сотрудника" Click="AddEmployee_Click"/>
         </StackPanel>

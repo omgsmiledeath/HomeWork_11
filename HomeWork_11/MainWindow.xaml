@@ -31,7 +31,7 @@
         </Grid>
 
         <ListView Grid.Column="1" x:Name="ListView1" 
-                  IsSynchronizedWithCurrentItem="True" SelectionChanged="ListView1_SelectionChanged">
+                  IsSynchronizedWithCurrentItem="True" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="50" 

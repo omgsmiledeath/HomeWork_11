@@ -8,7 +8,22 @@ namespace HomeWork_11.Models
 {
     class HighManager : Employee
     {
-        
+
+        public HighManager(string fname,
+            string lname,
+            string post,
+            byte age,
+            DateTime emplDate,
+            Department dep
+            ) :base (fname,lname,post,age,emplDate)
+        {
+            Salary = CalcSalary(dep);
+        }
+
+        public HighManager() :base ()
+        {
+
+        }
 
         public override uint CalcSalary(Department dep)
         {

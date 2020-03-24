@@ -25,6 +25,7 @@ namespace HomeWork_11
         {
             InitializeComponent();
             this.Dep = dep;
+            EmplTypes.Text = "Менеджер";
         }
 
 
@@ -77,7 +78,12 @@ namespace HomeWork_11
         /// <returns></returns>
         private Employee getInternt()
         {
-            return new Intern();
+            string fname = LnameBox.Text;
+            string lname = FnameBox.Text;
+            byte age = Convert.ToByte(AgeBox.Text);
+            DateTime empldate = Convert.ToDateTime(EmplDateBox.Text);
+            DateTime endofinter = Convert.ToDateTime(EndOfInternDate.Text);
+            return new Intern(fname,lname,age,empldate,endofinter);
         }
         /// <summary>
         /// Метод для получения данных и формирования экземпляра класса Топ Менеджер
@@ -85,12 +91,42 @@ namespace HomeWork_11
         /// <returns></returns>
         private Employee getHighManager()
         {
-            return new HighManager();
+            string fname = LnameBox.Text;
+            string lname = FnameBox.Text;
+            string post = PostBox.Text;
+            byte age = Convert.ToByte(AgeBox.Text);
+            DateTime empldate = Convert.ToDateTime(EmplDateBox.Text);
+            return new HighManager(fname,lname,post,age,empldate,dep);
         }
 
-        private void EmplTypes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+ 
+
+      
+
+        private void EmplTypes_DropDownClosed(object sender, EventArgs e)
         {
-           // if(EmplTypes.Text =="Интерн")
+            if (EmplTypes.Text == "Интерн")
+            {
+                PostBox.Visibility = Visibility.Hidden;
+                EndOfInternDate.Visibility = Visibility.Visible;
+                WorkHBox.Visibility = Visibility.Hidden;
+                PaymentBox.Visibility = Visibility.Hidden;
+            }
+            if (EmplTypes.Text == "Высший менеджер")
+            {
+                PostBox.Visibility = Visibility.Visible;
+                EndOfInternDate.Visibility = Visibility.Hidden;
+                WorkHBox.Visibility = Visibility.Hidden;
+                PaymentBox.Visibility = Visibility.Hidden;
+            }
+
+            if (EmplTypes.Text == "Менеджер")
+            {
+                PostBox.Visibility = Visibility.Visible;
+                EndOfInternDate.Visibility = Visibility.Hidden;
+                WorkHBox.Visibility = Visibility.Visible;
+                PaymentBox.Visibility = Visibility.Visible;
+            }
         }
     }
 }
