@@ -31,7 +31,7 @@
         </Grid>
 
         <ListView Grid.Column="1" x:Name="ListView1" 
-                  IsSynchronizedWithCurrentItem="True">
+                  IsSynchronizedWithCurrentItem="True" SelectionChanged="ListView1_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="50" 
@@ -94,7 +94,7 @@
                         Content="Удалить департамент" Click="DelDepartment_Click"
                         />
                 <Button x:Name="CalcSalaryButton" 
-                        Content="Посчитать зарплату всем"
+                        Content="Посчитать зп начальникам"
                         Click="CalcSalaryButton_Click"/>
             </StackPanel>
 
