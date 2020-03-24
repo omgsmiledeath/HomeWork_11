@@ -32,9 +32,25 @@ namespace HomeWork_11
 
         private void AddEmployee_Click(object sender, RoutedEventArgs e)
         {
+            Employee result = null;
+            switch (EmplTypes.Text)
+            {
+                case "Менеджер":
+                    result = getManager();
+                    Dep.AddWorker(result);
+                    break;
+                case "Высший менеджер":
+                    result = getHighManager();
+                    Dep.AddWorker(result);
+                    break;
+                default:
+                    result = getInternt();
+                    Dep.AddWorker(result);
+                    break;
 
-            Employee result = getManager();
-            Dep.AddWorker(result);
+            }
+
+            
             this.Close();
         }
 
@@ -61,7 +77,7 @@ namespace HomeWork_11
         /// <returns></returns>
         private Employee getInternt()
         {
-            return null;
+            return new Intern();
         }
         /// <summary>
         /// Метод для получения данных и формирования экземпляра класса Топ Менеджер
@@ -69,9 +85,12 @@ namespace HomeWork_11
         /// <returns></returns>
         private Employee getHighManager()
         {
-            return null;
+            return new HighManager();
         }
 
-
+        private void EmplTypes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           // if(EmplTypes.Text =="Интерн")
+        }
     }
 }

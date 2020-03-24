@@ -14,6 +14,12 @@
 
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
+            <ComboBox x:Name="EmplTypes" 
+                      SelectionChanged="EmplTypes_SelectionChanged">
+                <TextBlock Text="Интерн"/>
+                <TextBlock Text="Менеджер"/>
+                <TextBlock Text="Высший менеджер"/>
+            </ComboBox>
             <TextBlock Margin="5,8,5,5">Фамилия</TextBlock>
             <TextBlock Margin="5,8,5,5" >Имя</TextBlock>
             <TextBlock Margin="5,8,5,5" >Пост</TextBlock>

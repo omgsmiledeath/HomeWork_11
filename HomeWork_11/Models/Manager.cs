@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,8 +27,8 @@ namespace HomeWork_11.Models
 
         public Manager() :base()
         {
-            WorkHour = 30;
-            paymentForHour = 3;
+            WorkHour = 50;
+            paymentForHour = 15;
             Salary = CalcSalary();
         }
 

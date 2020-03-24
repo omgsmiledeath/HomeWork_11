@@ -41,7 +41,7 @@ namespace HomeWork_11
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             organization = new Department("ОГКУ ДИРЕКЦИЯ АВТОДОРОГ");
-            organization.AddWorker(new Manager());
+            organization.AddWorker(new HighManager());
             organization.AddSubDepartment(new Department("Отдел МТО"));
             
             organization.AddSubDepartment(new Department("Отдел МТО2"));
@@ -55,13 +55,20 @@ namespace HomeWork_11
             foreach (var item in organization.Departments)
             {
                 item.AddWorker(new Manager());
-                item.AddWorker(new Manager());
+                item.AddWorker(new HighManager());
                 item.AddWorker(new Manager());
                 item.AddSubDepartment(new Department("Отдел Олега"));
                 item.Departments[0].AddWorker(new Manager());
                 
             }
             organization.Departments[1].Departments[0].AddSubDepartment(new Department("Еще отдел олега"));
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
 
             // OrganizationTree.Items.Add(organization);
             // MessageBox.Show($"{organization.GetDepartmens().Count}");
@@ -208,6 +215,22 @@ namespace HomeWork_11
             parentDep.Departments.Remove((Department) txt1.DataContext);
             parent.IsExpanded = false;
             parent.IsExpanded = true;
+        }
+
+        private void CalcSalaryButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(var el in organization.Employees)
+            {
+                if(el is HighManager)
+                {
+                    el.Salary = el.CalcSalary(organization);
+                    MessageBox.Show(Convert.ToString(el.Salary));
+                    //ListView1.
+                    return;
+                }
+            }
+            MessageBox.Show("Директора организации не обнаружено");
+            
         }
     }
 }

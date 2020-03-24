@@ -28,6 +28,12 @@ namespace HomeWork_11.Models
             Salary = CalcSalary();
         }
 
+        public Intern() :base()
+        {
+            EndOfInternature = Convert.ToDateTime("2100.1.1");
+            Salary = CalcSalary();
+        }
+
         /// <summary>
         /// Автосвойство для даты окончания интернатуры
         /// </summary>

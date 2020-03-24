@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace HomeWork_11.Models
 {
-    public abstract class Employee : IEquatable<Employee>
+    public abstract class Employee : IEquatable<Employee>, INotifyPropertyChanged
     {
         #region Static поля и конструктор
         static protected List<string> IdList; // Список всех ID 
@@ -27,6 +28,8 @@ namespace HomeWork_11.Models
         private DateTime employmentDate; //Дата приема на работу
         private byte age; //Возраст сотрудника
         private uint salary; //Зарплата сотрудника
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 
@@ -70,7 +73,20 @@ namespace HomeWork_11.Models
         public byte Age { get => age; set => age = value; }
 
         public DateTime EmploymentDate { get => employmentDate; set => employmentDate = value; }
-        public uint Salary { get => salary; set => salary = value; }
+        public uint Salary
+        {
+            get => salary;
+            set
+            {
+                salary = value;
+                OnPropertyChanged();
+            }
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         /// <summary>
         /// Свойство подсчета зарплаты

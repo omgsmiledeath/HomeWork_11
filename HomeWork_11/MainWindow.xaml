@@ -30,11 +30,13 @@
             </TreeView>
         </Grid>
 
-        <ListView Grid.Column="1" x:Name="ListView1">
+        <ListView Grid.Column="1" x:Name="ListView1" 
+                  IsSynchronizedWithCurrentItem="True">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="50" 
-                        DisplayMemberBinding="{Binding Path=Id}">ID
+                        DisplayMemberBinding="{Binding Path=Id}"
+                                    >ID
                     </GridViewColumn>
                     <GridViewColumn Width="90"
                         DisplayMemberBinding="{Binding Path=Last_Name}"
@@ -46,14 +48,14 @@
                     <GridViewColumn Width="90"
                         DisplayMemberBinding="{Binding Path=Post}">Должность
                     </GridViewColumn>
-                    <GridViewColumn 
+                    <GridViewColumn Width="50"
                         DisplayMemberBinding="{Binding Path=Age}">Возраст
                     </GridViewColumn>
-                    <GridViewColumn
+                    <GridViewColumn Width="80"
                         DisplayMemberBinding="{Binding Path=EmploymentDate}">
                         Дата приема
                     </GridViewColumn>
-                    <GridViewColumn 
+                    <GridViewColumn Width="90"
                         DisplayMemberBinding="{Binding Path=Salary}">Зарплата
                     </GridViewColumn>
                 </GridView>
@@ -78,6 +80,7 @@
                 Content="Добавить сотрудника" Margin="0 0 0 10"/>
                 <Button x:Name="DelWorkerButton" Click="DelWorkerButton_Click"
                         Content="Удалить сотрудника" />
+                
             </StackPanel>
 
 
@@ -86,10 +89,13 @@
                            TextWrapping="Wrap"/>
                 <Button x:Name="AddDepartment" Content="Добавить департамент"
                     Click="AddDepartment_Click" 
-                        Margin="0 0 0 0"/>
+                        Margin="0 0 0 10"/>
                 <Button x:Name="DelDepartment" 
                         Content="Удалить департамент" Click="DelDepartment_Click"
                         />
+                <Button x:Name="CalcSalaryButton" 
+                        Content="Посчитать зарплату всем"
+                        Click="CalcSalaryButton_Click"/>
             </StackPanel>
 
         </Grid>
