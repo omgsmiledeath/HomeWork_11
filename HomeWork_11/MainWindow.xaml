@@ -56,8 +56,7 @@
         <TextBlock x:Name="txt1"
                    Text="{Binding DepartmentName}"
                     />
-            <TextBlock x:Name="txt2"/>
-            <Button x:Name="AddWorkerButton" Click="AddWorkerButton_Click" 
+        <Button x:Name="AddWorkerButton" Click="AddWorkerButton_Click" 
                 Content="Добавить сотрудника" Margin="0 0 0 10"/>
             <Button x:Name="AddDepartment" Content="Добавить департамент"
                     Click="AddDepartment_Click" Margin="0 0 0 10"/>

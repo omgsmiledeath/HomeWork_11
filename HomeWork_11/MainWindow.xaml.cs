@@ -102,9 +102,9 @@ namespace HomeWork_11
         {
             TreeViewItem item = (TreeViewItem)e.Source;
             //if (item.Items.Count == 0)
-           //     item.Items.Refresh();
-           // item.Items.Clear();
-           // item.Items.Add(null);
+                item.Items.Refresh();
+            item.Items.Clear();
+            item.Items.Add(null);
         }
 
         private void org_expanded(object sender, RoutedEventArgs e)
@@ -149,7 +149,6 @@ namespace HomeWork_11
         private void OrganizationTree_Selected(object sender, RoutedEventArgs e)
         {
             var item = (TreeViewItem)e.OriginalSource;
-            txt2.DataContext = item;
             var dep = (Department)item.DataContext;
             ListBox1.ItemsSource = dep.Employees;
            
@@ -182,10 +181,6 @@ namespace HomeWork_11
             }
             dep.AddSubDepartment(new Department("Новый"));
             MessageBox.Show(dep.DepartmentName);
-
-            //TreeViewItem CurrentTree = (TreeViewItem)txt2.DataContext;
-            //CurrentTree.Items.Add(null);
-            
             
         }
     }
