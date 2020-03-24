@@ -53,7 +53,8 @@
 
         </ListBox>
         <StackPanel Grid.Column="2" >
-        <TextBlock x:Name="txt1"
+            <TextBlock x:Name="txt2"/>
+            <TextBlock x:Name="txt1"
                    Text="{Binding DepartmentName}"
                     />
         <Button x:Name="AddWorkerButton" Click="AddWorkerButton_Click" 
