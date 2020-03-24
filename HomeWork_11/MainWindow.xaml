@@ -34,27 +34,39 @@
                   IsSynchronizedWithCurrentItem="True" >
             <ListView.View>
                 <GridView>
+                    <!--
                     <GridViewColumn Width="50" 
                         DisplayMemberBinding="{Binding Path=Id}"
                                     >ID
                     </GridViewColumn>
+                    -->
+                    <GridViewColumn Width="50"
+                        DisplayMemberBinding="{Binding Path=First_Name}">Имя
+                    </GridViewColumn>
+                    
                     <GridViewColumn Width="90"
                         DisplayMemberBinding="{Binding Path=Last_Name}"
                          >Фамилия
                     </GridViewColumn>
-                    <GridViewColumn Width="50"
-                        DisplayMemberBinding="{Binding Path=First_Name}">Имя
-                    </GridViewColumn>
+                    
                     <GridViewColumn Width="90"
                         DisplayMemberBinding="{Binding Path=Post}">Должность
                     </GridViewColumn>
+                    
                     <GridViewColumn Width="50"
                         DisplayMemberBinding="{Binding Path=Age}">Возраст
                     </GridViewColumn>
+                    
                     <GridViewColumn Width="80"
                         DisplayMemberBinding="{Binding Path=EmploymentDate}">
                         Дата приема
                     </GridViewColumn>
+                    
+                    <GridViewColumn Width="80"
+                        DisplayMemberBinding="{Binding Path=EndOfInternature}">
+                        Конец интернатуры
+                    </GridViewColumn>
+                    
                     <GridViewColumn Width="90"
                         DisplayMemberBinding="{Binding Path=Salary}">Зарплата
                     </GridViewColumn>
