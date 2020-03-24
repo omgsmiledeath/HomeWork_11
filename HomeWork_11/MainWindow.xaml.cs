@@ -151,7 +151,7 @@ namespace HomeWork_11
         {
             var item = (TreeViewItem)e.OriginalSource;
             var dep = (Department)item.DataContext;
-            ListBox1.ItemsSource = dep.Employees;
+            ListView1.ItemsSource = dep.Employees;
             txt2.DataContext = item;
             txt2.Text = Convert.ToString(dep.Departments.Count);
             //dep.AddWorker(new Manager());
