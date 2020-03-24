@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeWork_11"
         mc:Ignorable="d"
-        Title="MainWindow" Height="473.03" Width="1265.455" Loaded="Window_Loaded">
+        Title="MainWindow" Height="473.03" Width="1000" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="167*"/>
             <ColumnDefinition Width="422*"/>
-            <ColumnDefinition Width="203*"/>
+            <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
@@ -33,7 +33,7 @@
         <ListView Grid.Column="1" x:Name="ListView1">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="50"
+                    <GridViewColumn Width="50" 
                         DisplayMemberBinding="{Binding Path=Id}">ID
                     </GridViewColumn>
                     <GridViewColumn Width="90"
@@ -61,16 +61,38 @@
 
 
         </ListView>
-        <StackPanel Grid.Column="2" >
-            <TextBlock x:Name="txt2"/>
-            <TextBlock x:Name="txt1"
-                   Text="{Binding DepartmentName}"
+        <Grid  Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+                
+                <StackPanel  Grid.Row="0">
+                <TextBlock x:Name="txt2" Text="Работа с сотрудниками департамента:"
+                       TextWrapping="Wrap"/>
+                    <TextBlock x:Name="txt1" 
+                   Text="{Binding DepartmentName}" TextWrapping="Wrap"
                     />
-            <Button x:Name="AddWorkerButton" Click="AddWorkerButton_Click" 
+                    <Button x:Name="AddWorkerButton" Click="AddWorkerButton_Click" 
                 Content="Добавить сотрудника" Margin="0 0 0 10"/>
-            <Button x:Name="AddDepartment" Content="Добавить департамент"
-                    Click="AddDepartment_Click" Margin="0 0 0 10"/>
-        </StackPanel>
+                <Button x:Name="DelWorkerButton" Click="DelWorkerButton_Click"
+                        Content="Удалить сотрудника" />
+            </StackPanel>
+
+
+            <StackPanel  Grid.Row="1">
+                <TextBlock Text="Работа с департаментами" 
+                           TextWrapping="Wrap"/>
+                <Button x:Name="AddDepartment" Content="Добавить департамент"
+                    Click="AddDepartment_Click" 
+                        Margin="0 0 0 0"/>
+                <Button x:Name="DelDepartment" 
+                        Content="Удалить департамент" Click="DelDepartment_Click"
+                        />
+            </StackPanel>
+
+        </Grid>
 
     </Grid>
 </Window>

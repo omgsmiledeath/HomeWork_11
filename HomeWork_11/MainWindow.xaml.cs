@@ -153,10 +153,9 @@ namespace HomeWork_11
             var dep = (Department)item.DataContext;
             ListView1.ItemsSource = dep.Employees;
             txt2.DataContext = item;
-            txt2.Text = Convert.ToString(dep.Departments.Count);
-            //dep.AddWorker(new Manager());
+            
             txt1.DataContext = dep;
-            //OrganizationTree.Tag = item.DataContext;
+
         }
 
         private void AddWorkerButton_Click(object sender, RoutedEventArgs e)
@@ -191,6 +190,24 @@ namespace HomeWork_11
             CurrentTree.IsExpanded = true;
 
 
+        }
+
+        private void DelWorkerButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectEmployee = (Employee)ListView1.SelectedItem;
+            var dep = (Department)txt1.DataContext;
+
+            dep.Employees.Remove(selectEmployee);
+        }
+
+        private void DelDepartment_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedDep = (TreeViewItem)OrganizationTree.SelectedItem;
+            var parent =(TreeViewItem) selectedDep.Parent;
+            Department parentDep =(Department) parent.DataContext;
+            parentDep.Departments.Remove((Department) txt1.DataContext);
+            parent.IsExpanded = false;
+            parent.IsExpanded = true;
         }
     }
 }
