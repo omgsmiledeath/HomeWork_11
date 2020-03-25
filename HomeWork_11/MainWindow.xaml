@@ -3,6 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         xmlns:local="clr-namespace:HomeWork_11"
         mc:Ignorable="d"
         Title="MainWindow" Height="473.03" Width="1000" Loaded="Window_Loaded">
@@ -21,7 +29,12 @@
                         <Setter Property="HeaderTemplate" >
                             <Setter.Value>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding}"/>
+                                    <TextBlock Text="{Binding}" 
+                                               >
+                                        <TextBlock.Foreground>
+                                            <SolidColorBrush Color="White"/>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
                                 </DataTemplate>
                             </Setter.Value>
                         </Setter>
@@ -34,14 +47,11 @@
                   IsSynchronizedWithCurrentItem="True" >
             <ListView.View>
                 <GridView>
-                    <!--
-                    <GridViewColumn Width="50" 
-                        DisplayMemberBinding="{Binding Path=Id}"
-                                    >ID
-                    </GridViewColumn>
-                    -->
-                    <GridViewColumn Width="50"
+
+                    <GridViewColumn Width="80" 
                         DisplayMemberBinding="{Binding Path=First_Name}">Имя
+                       
+                        
                     </GridViewColumn>
                     
                     <GridViewColumn Width="90"
@@ -49,7 +59,7 @@
                          >Фамилия
                     </GridViewColumn>
                     
-                    <GridViewColumn Width="90"
+                    <GridViewColumn Width="110"
                         DisplayMemberBinding="{Binding Path=Post}">Должность
                     </GridViewColumn>
                     
@@ -83,12 +93,14 @@
 
                 
                 <StackPanel  Grid.Row="0">
+                    
                 <TextBlock x:Name="txt2" Text="Работа с сотрудниками департамента:"
                        TextWrapping="Wrap"/>
                     <TextBlock x:Name="txt1" 
                    Text="{Binding DepartmentName}" TextWrapping="Wrap"
                     />
-                    <Button x:Name="AddWorkerButton" Click="AddWorkerButton_Click" 
+                <Button x:Name="AddWorkerButton" 
+                        Click="AddWorkerButton_Click" 
                 Content="Добавить сотрудника" Margin="0 0 0 10"/>
                 <Button x:Name="DelWorkerButton" Click="DelWorkerButton_Click"
                         Content="Удалить сотрудника" />

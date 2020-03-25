@@ -88,7 +88,9 @@ namespace HomeWork_11
             mainItem.Selected += OrganizationTree_Selected;
             mainItem.Expanded += org_expanded;
             mainItem.Collapsed += org_colapsed;
+
             OrganizationTree.Items.Add(mainItem);
+            
 
             foreach (var item in organization.GetDepartmens())
             {
