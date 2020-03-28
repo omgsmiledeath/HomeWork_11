@@ -25,7 +25,7 @@ namespace HomeWork_11
         {
             InitializeComponent();
             this.Dep = dep;
-            EmplTypes.Text = "Менеджер";
+
         }
 
 
@@ -111,6 +111,7 @@ namespace HomeWork_11
                 EndOfInternDate.Visibility = Visibility.Visible;
                 WorkHBox.Visibility = Visibility.Hidden;
                 PaymentBox.Visibility = Visibility.Hidden;
+                
             }
             if (EmplTypes.Text == "Высший менеджер")
             {
@@ -128,5 +129,7 @@ namespace HomeWork_11
                 PaymentBox.Visibility = Visibility.Visible;
             }
         }
+
+
     }
 }

@@ -3,6 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         xmlns:local="clr-namespace:HomeWork_11"
         mc:Ignorable="d"
         Title="Добавление сотрудника в отдел" Height="450" Width="800" >
@@ -14,10 +22,27 @@
 
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <ComboBox x:Name="EmplTypes" DropDownClosed="EmplTypes_DropDownClosed">
-                <TextBlock Text="Интерн"/>
-                <TextBlock Text="Менеджер"/>
-                <TextBlock Text="Высший менеджер"/>
+            <ComboBox 
+                x:Name="EmplTypes" 
+                DropDownClosed="EmplTypes_DropDownClosed"
+                materialDesign:HintAssist.Hint="Тип сотрудника" IsReadOnly="True">
+                <ComboBoxItem DataContext="Высший менеджер">
+                    
+                       Высший менеджер
+                  
+                </ComboBoxItem>
+                <ComboBoxItem>
+                   
+                        Интерн
+                
+                </ComboBoxItem>
+                <ComboBoxItem>
+                   
+                       Менеджер
+                   
+                </ComboBoxItem>
+
+                
             </ComboBox>
             <TextBlock Margin="5,15,0,5" HorizontalAlignment="Left" Width="173" Height="21">Фамилия</TextBlock>
             <TextBlock Margin="5,15,5,5" >Имя</TextBlock>

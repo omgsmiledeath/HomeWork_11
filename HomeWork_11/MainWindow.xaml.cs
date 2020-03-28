@@ -184,20 +184,28 @@ namespace HomeWork_11
 
         private void AddDepartment_Click(object sender, RoutedEventArgs e)
         {
+            if(NameDepBox.Text == String.Empty)
+            {
+                MessageBox.Show("Укажите название для департамента");
+            }
+            else { 
             Department dep = new Department(null);
             if ((Department)txt1.DataContext is Department)
             {
                 dep = (Department)txt1.DataContext;
             }
-            dep.AddSubDepartment(new Department("Новый"));
-            MessageBox.Show(dep.DepartmentName);
+            dep.AddSubDepartment(new Department(NameDepBox.Text));
             var CurrentTree = (TreeViewItem)txt2.DataContext;
+                if (CurrentTree is null) MessageBox.Show("Не выбран управляющий департамент");
+                else { 
             if(CurrentTree.Items.Count==0)
             CurrentTree.Items.Add(null);
 
-            CurrentTree.IsExpanded = false;
-            CurrentTree.IsExpanded = true;
-
+                    CurrentTree.IsExpanded = true;
+                    CurrentTree.IsExpanded = false;
+                    CurrentTree.IsExpanded = true;
+                }
+            }
 
         }
 
@@ -211,12 +219,23 @@ namespace HomeWork_11
 
         private void DelDepartment_Click(object sender, RoutedEventArgs e)
         {
+            
+            
             var selectedDep = (TreeViewItem)OrganizationTree.SelectedItem;
-            var parent =(TreeViewItem) selectedDep.Parent;
+            if (selectedDep.Parent is TreeViewItem)
+            {
+                var parent =(TreeViewItem) selectedDep.Parent;
             Department parentDep =(Department) parent.DataContext;
             parentDep.Departments.Remove((Department) txt1.DataContext);
-            parent.IsExpanded = false;
-            parent.IsExpanded = true;
+                parent.IsExpanded = false;
+                parent.IsExpanded = true;
+            }
+            else
+            {
+                MessageBox.Show("Вы собираетесь удалить всю организацию.");
+            }
+            
+
         }
 
         private void CalcSalaryButton_Click(object sender, RoutedEventArgs e)
