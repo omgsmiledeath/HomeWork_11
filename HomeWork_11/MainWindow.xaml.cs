@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HomeWork_11.Models;
+using Newtonsoft.Json;
 
 namespace HomeWork_11
 {
@@ -22,7 +24,7 @@ namespace HomeWork_11
     public partial class MainWindow : Window
     {
         private Department organization;
-        
+        private OrganizationBase repo;
         #region Конструктор
         /// <summary>
         /// При запуске приложения
@@ -40,6 +42,8 @@ namespace HomeWork_11
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            
+
             organization = new Department("ОГКУ ДИРЕКЦИЯ АВТОДОРОГ");
             organization.AddWorker(new HighManager());
             organization.AddSubDepartment(new Department("Отдел МТО"));
@@ -252,6 +256,19 @@ namespace HomeWork_11
             }
             MessageBox.Show("Директора организации не обнаружено");
             
+        }
+
+        private void settingsCheck()
+        {
+            
+            if(File.Exists("base.json"))
+            {
+                repo = JsonConvert.DeserializeObject<OrganizationBase>("base.json");
+            }
+            else
+            {
+                
+            }
         }
     }
 }
