@@ -43,37 +43,16 @@ namespace HomeWork_11
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            repo = new OrganizationBase();
-
-            organization = new Department("ОГКУ ДИРЕКЦИЯ АВТОДОРОГ");
-            organization.AddWorker(new HighManager());
-            organization.AddSubDepartment(new Department("Отдел МТО"));
-            
-            organization.AddSubDepartment(new Department("Отдел МТО2"));
-            
-            
-            organization.AddSubDepartment(new Department("Отдел МТО3"));
-            organization.AddSubDepartment(new Department("Отдел МТО4"));
-            organization.AddSubDepartment(new Department("Отдел МТО5"));
-            organization.AddSubDepartment(new Department("Отдел МТО6"));
-            organization.AddSubDepartment(new Department("Отдел МТО7"));
-            foreach (var item in organization.Departments)
+            //repo = new OrganizationBase();
+            string json;
+            using (StreamReader sr = new StreamReader("base.json"))
             {
-                item.AddWorker(new Manager());
-                item.AddWorker(new HighManager());
-                item.AddWorker(new Manager());
-                item.AddSubDepartment(new Department("Отдел Олега"));
-                item.Departments[0].AddWorker(new Manager());
-                
+                json = sr.ReadToEnd();
             }
-            organization.Departments[1].Departments[0].AddSubDepartment(new Department("Еще отдел олега"));
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
+
+            organization = JsonConvert.DeserializeObject<Department>(json);
+
+            //fillDepartment();
 
             // OrganizationTree.Items.Add(organization);
             // MessageBox.Show($"{organization.GetDepartmens().Count}");
@@ -157,9 +136,45 @@ namespace HomeWork_11
                 }   
         }
 
-        private void fillDepartment(Department subDepartment)
+        private void fillDepartment()
         {
-            
+            organization = new Department("ОГКУ ДИРЕКЦИЯ АВТОДОРОГ");
+            organization.AddWorker(new HighManager());
+            organization.AddSubDepartment(new Department("Отдел МТО"));
+
+            organization.AddSubDepartment(new Department("Отдел МТО2"));
+
+
+            organization.AddSubDepartment(new Department("Отдел МТО3"));
+            organization.AddSubDepartment(new Department("Отдел МТО4"));
+            organization.AddSubDepartment(new Department("Отдел МТО5"));
+            organization.AddSubDepartment(new Department("Отдел МТО6"));
+            organization.AddSubDepartment(new Department("Отдел МТО7"));
+            foreach (var item in organization.Departments)
+            {
+                item.AddWorker(new Manager());
+                item.AddWorker(new HighManager());
+                item.AddWorker(new Manager());
+                item.AddSubDepartment(new Department("Отдел Олега"));
+                item.Departments[0].AddWorker(new Manager());
+
+            }
+            organization.Departments[1].Departments[0].AddSubDepartment(new Department("Еще отдел олега"));
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+            organization.Departments[1].Departments[0].AddWorker(new Manager());
+
+
+            string json = JsonConvert.SerializeObject(organization);
+            using (StreamWriter sw = new StreamWriter("base.json"))
+            {
+                sw.WriteLine(json);
+            }
+
         }
 
         private void OrganizationTree_Selected(object sender, RoutedEventArgs e)

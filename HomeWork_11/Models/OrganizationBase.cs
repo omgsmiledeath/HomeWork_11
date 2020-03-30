@@ -24,6 +24,7 @@ namespace HomeWork_11.Models
             Load(currentPath);
         }
 
+
         private void LoadLastState()
         {
             var oldBase = JsonConvert.DeserializeObject<OrganizationBase>("base.json");
