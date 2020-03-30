@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HomeWork_11.Models;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 
 namespace HomeWork_11
@@ -42,7 +43,7 @@ namespace HomeWork_11
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            repo = new OrganizationBase();
 
             organization = new Department("ОГКУ ДИРЕКЦИЯ АВТОДОРОГ");
             organization.AddWorker(new HighManager());
@@ -93,6 +94,7 @@ namespace HomeWork_11
             mainItem.Expanded += org_expanded;
             mainItem.Collapsed += org_colapsed;
 
+            OrganizationTree.Items.Clear();
             OrganizationTree.Items.Add(mainItem);
             
 
@@ -188,6 +190,11 @@ namespace HomeWork_11
 
         private void AddDepartment_Click(object sender, RoutedEventArgs e)
         {
+
+           
+
+
+
             if(NameDepBox.Text == String.Empty)
             {
                 MessageBox.Show("Укажите название для департамента");
@@ -215,28 +222,36 @@ namespace HomeWork_11
 
         private void DelWorkerButton_Click(object sender, RoutedEventArgs e)
         {
-            var selectEmployee = (Employee)ListView1.SelectedItem;
-            var dep = (Department)txt1.DataContext;
 
-            dep.Employees.Remove(selectEmployee);
+            var choise = MessageBox.Show("Уверены что хотите удалить данного сотрудника?", "Внимание", MessageBoxButton.YesNo);
+            if (choise == MessageBoxResult.Yes)
+            {
+                var selectEmployee = (Employee)ListView1.SelectedItem;
+                var dep = (Department)txt1.DataContext;
+
+                dep.Employees.Remove(selectEmployee);
+            }
         }
 
         private void DelDepartment_Click(object sender, RoutedEventArgs e)
         {
-            
-            
-            var selectedDep = (TreeViewItem)OrganizationTree.SelectedItem;
-            if (selectedDep.Parent is TreeViewItem)
+
+            var choise = MessageBox.Show("Уверены что хотите удалить данный департамент?", "Внимание", MessageBoxButton.YesNo);
+            if (choise == MessageBoxResult.Yes)
             {
-                var parent =(TreeViewItem) selectedDep.Parent;
-            Department parentDep =(Department) parent.DataContext;
-            parentDep.Departments.Remove((Department) txt1.DataContext);
-                parent.IsExpanded = false;
-                parent.IsExpanded = true;
-            }
-            else
-            {
-                MessageBox.Show("Вы собираетесь удалить всю организацию.");
+                var selectedDep = (TreeViewItem)OrganizationTree.SelectedItem;
+                if (selectedDep.Parent is TreeViewItem)
+                {
+                    var parent = (TreeViewItem)selectedDep.Parent;
+                    Department parentDep = (Department)parent.DataContext;
+                    parentDep.Departments.Remove((Department)txt1.DataContext);
+                    parent.IsExpanded = false;
+                    parent.IsExpanded = true;
+                }
+                else
+                {
+                    MessageBox.Show("Вы собираетесь удалить всю организацию.");
+                }
             }
             
 
@@ -269,6 +284,51 @@ namespace HomeWork_11
             {
                 
             }
+        }
+
+        private void startFileDialogToLoad()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            Nullable<bool> result = ofd.ShowDialog();
+            string path = ofd.FileName;
+            repo.Load(path);
+        }
+
+        private void LoadBaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (repo.IsSaved == false)
+            {
+                var choise = MessageBox.Show("Хотите сохранить изменения в текущей базе?", "Внимание", MessageBoxButton.YesNo);
+                if (choise == MessageBoxResult.Yes)
+                {
+                    repo.Save();
+                    startFileDialogToLoad();
+                }
+                else if(choise == MessageBoxResult.No)
+                {
+                    startFileDialogToLoad();
+                }
+            }
+            else
+            {
+                startFileDialogToLoad();
+            }
+
+            }
+
+        private void SaveBaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            repo.Save();
+        }
+
+        private void SaveAsBaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            Nullable<bool> result = ofd.ShowDialog();
+            string path = ofd.FileName;
+            repo.Save(path);
         }
     }
 }

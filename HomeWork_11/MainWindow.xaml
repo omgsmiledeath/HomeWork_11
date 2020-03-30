@@ -25,7 +25,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="1">
-            <TreeView Name="OrganizationTree" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="64*"/>
+                <ColumnDefinition Width="217*"/>
+            </Grid.ColumnDefinitions>
+            <TreeView Name="OrganizationTree" Grid.ColumnSpan="2" >
 
                 <TreeView.Resources>
                     <Style TargetType="{x:Type TreeViewItem}">
@@ -99,12 +103,12 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-                
-                <StackPanel  Grid.Row="0">
-                    
+
+            <StackPanel  Grid.Row="0">
+
                 <TextBlock x:Name="txt2" Text="Работа с сотрудниками департамента:"
                        TextWrapping="Wrap"/>
-                    <TextBlock x:Name="txt1" 
+                <TextBlock x:Name="txt1" 
                    Text="{Binding DepartmentName}" TextWrapping="Wrap"
                     />
                 <Button x:Name="AddWorkerButton" 
@@ -131,14 +135,41 @@
                 <Button x:Name="DelDepartment" 
                         Content="Удалить департамент" Click="DelDepartment_Click"
                         />
-                
+
             </StackPanel>
 
         </Grid>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <materialDesign:ComboBoxPopup>
-                
+
             </materialDesign:ComboBoxPopup>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button x:Name="SaveBaseButton"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}" Click="SaveBaseButton_Click">
+                <materialDesign:PackIcon Kind="ContentSaveOutline" />
+            </Button>
+
+
+            <Button x:Name="SaveAsBaseButton"
+                    Background="{x:Null}"
+                    Click="SaveAsBaseButton_Click"
+                    BorderBrush="{x:Null}">
+                <materialDesign:PackIcon Kind="ContentSaveSettingsOutline" />
+                
+            </Button>
+
+
+            <Button x:Name="LoadBaseButton"
+                    Click="LoadBaseButton_Click"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}">
+                <materialDesign:PackIcon Kind="FolderUploadOutline" />
+            </Button>
+
+
+
         </StackPanel>
     </Grid>
 </Window>

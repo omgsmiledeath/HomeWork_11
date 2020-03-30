@@ -17,12 +17,17 @@ namespace HomeWork_11.Models
             return dep;
         }
 
-
-
-        public OrganizationBase(string path)
+        public OrganizationBase()
         {
-            Load(path);
-            currentPath = path;
+            LoadLastState();
+            dep = null;
+            Load(currentPath);
+        }
+
+        private void LoadLastState()
+        {
+            var oldBase = JsonConvert.DeserializeObject<OrganizationBase>("base.json");
+            this.currentPath = oldBase.currentPath;
         }
 
         public void Load(string path)
@@ -35,10 +40,22 @@ namespace HomeWork_11.Models
         public void Save()
         {
             string serDep = JsonConvert.SerializeObject(dep);
-            using (StreamWriter sw = new StreamWriter(currentPath))
+            if (currentPath == string.Empty)
             {
-                sw.WriteLine(serDep);
+                currentPath = "base.json";
+                using (StreamWriter sw = new StreamWriter(currentPath))
+                {
+                    sw.WriteLine(serDep);
+                }
             }
+            else
+            {
+                using (StreamWriter sw = new StreamWriter(currentPath))
+                {
+                    sw.WriteLine(serDep);
+                }
+            }
+        
             IsSaved = true;
         }
 
