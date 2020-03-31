@@ -314,6 +314,8 @@ namespace HomeWork_11
             Nullable<bool> result = ofd.ShowDialog();
             string path = ofd.FileName;
             if(path != string.Empty) repo.Load(path);
+            organization = repo.GetOrganization();
+            mainorg_expanded();
         }
 
         private void LoadBaseButton_Click(object sender, RoutedEventArgs e)
@@ -345,10 +347,10 @@ namespace HomeWork_11
 
         private void SaveAsBaseButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
 
-            Nullable<bool> result = ofd.ShowDialog();
-            string path = ofd.FileName;
+            SaveFileDialog sfd = new SaveFileDialog();
+            Nullable<bool> result = sfd.ShowDialog();
+            string path = sfd.FileName;
             repo.Save(path);
         }
     }
