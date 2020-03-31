@@ -33,6 +33,8 @@ namespace HomeWork_11
         public MainWindow()
         {
             InitializeComponent();
+            repo = new OrganizationBase();
+            organization = repo.GetOrganization();
         }
         #endregion
 
@@ -43,25 +45,7 @@ namespace HomeWork_11
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-             repo = new OrganizationBase();
-            //fillDepartment();
-            //string json;
-            //using (StreamReader sr = new StreamReader("base.json"))
-            //{
-            //    json = sr.ReadToEnd();
-            //}
-
-            //organization = JsonConvert.DeserializeObject<Department>(json, new JsonSerializerSettings
-            //{
-            //    TypeNameHandling = TypeNameHandling.All
-            //});
-
-             organization = repo.GetOrganization();
-
-
-
-            // OrganizationTree.Items.Add(organization);
-            // MessageBox.Show($"{organization.GetDepartmens().Count}");
+             
 
             mainorg_expanded();
                       
@@ -212,10 +196,6 @@ namespace HomeWork_11
         private void AddDepartment_Click(object sender, RoutedEventArgs e)
         {
 
-           
-
-
-
             if(NameDepBox.Text == String.Empty)
             {
                 MessageBox.Show("Укажите название для департамента");
@@ -280,18 +260,28 @@ namespace HomeWork_11
 
         private void CalcSalaryButton_Click(object sender, RoutedEventArgs e)
         {
-            foreach(var el in organization.Employees)
-            {
-                if(el is HighManager)
-                {
-                    el.Salary = el.CalcSalary(organization);
-                    MessageBox.Show(Convert.ToString(el.Salary));
-                    //ListView1.
-                    return;
-                }
-            }
-            MessageBox.Show("Директора организации не обнаружено");
+            firstHightManager(organization);
+           
+           // MessageBox.Show("Директора организации не обнаружено");
             
+        }
+
+        private void firstHightManager(Department dep)
+        {
+            foreach (var item in dep.Departments)
+            {
+                foreach (var el in item.Employees)
+                {
+                    if (el is HighManager)
+                    {
+                        el.Salary = el.CalcSalary(organization);
+                        MessageBox.Show(Convert.ToString(el.Salary));
+                        return;
+                    }
+
+                }
+                firstHightManager(item);
+            }
         }
 
         private void settingsCheck()
