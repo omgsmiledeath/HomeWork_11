@@ -83,12 +83,6 @@
                     </GridViewColumn>
 
                     <GridViewColumn Width="100"
-                        DisplayMemberBinding="{Binding Path=EndOfInternature,
-                        StringFormat='yyyy-MM-dd'}">
-                        <TextBlock Text="{Binding}" TextWrapping="Wrap">Конец интернатуры</TextBlock>
-                    </GridViewColumn>
-
-                    <GridViewColumn Width="100"
                         DisplayMemberBinding="{Binding Path=Salary}">
                         <TextBlock Text="{Binding}" TextWrapping="Wrap">Зарплата</TextBlock>
                     </GridViewColumn>

@@ -13,6 +13,7 @@ namespace HomeWork_11.Models
         private ushort paymentForHour; //оплата за 1 рабочий час
 
 
+
         public Manager(string fname, 
             string lname, 
             string post,
@@ -23,6 +24,7 @@ namespace HomeWork_11.Models
         {
             WorkHour = workHour;
             PaymentForHour = paymentForHour;
+            Salary = CalcSalary();
         }
 
         public Manager() :base()

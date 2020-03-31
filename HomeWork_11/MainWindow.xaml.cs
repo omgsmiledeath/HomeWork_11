@@ -43,16 +43,22 @@ namespace HomeWork_11
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //repo = new OrganizationBase();
-            string json;
-            using (StreamReader sr = new StreamReader("base.json"))
-            {
-                json = sr.ReadToEnd();
-            }
-
-            organization = JsonConvert.DeserializeObject<Department>(json);
-
+             repo = new OrganizationBase();
             //fillDepartment();
+            //string json;
+            //using (StreamReader sr = new StreamReader("base.json"))
+            //{
+            //    json = sr.ReadToEnd();
+            //}
+
+            //organization = JsonConvert.DeserializeObject<Department>(json, new JsonSerializerSettings
+            //{
+            //    TypeNameHandling = TypeNameHandling.All
+            //});
+
+             organization = repo.GetOrganization();
+
+
 
             // OrganizationTree.Items.Add(organization);
             // MessageBox.Show($"{organization.GetDepartmens().Count}");
@@ -168,8 +174,8 @@ namespace HomeWork_11
             organization.Departments[1].Departments[0].AddWorker(new Manager());
             organization.Departments[1].Departments[0].AddWorker(new Manager());
 
-
-            string json = JsonConvert.SerializeObject(organization);
+            var jset = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
+            string json = JsonConvert.SerializeObject(organization, Formatting.Indented, jset);
             using (StreamWriter sw = new StreamWriter("base.json"))
             {
                 sw.WriteLine(json);
@@ -307,7 +313,7 @@ namespace HomeWork_11
 
             Nullable<bool> result = ofd.ShowDialog();
             string path = ofd.FileName;
-            repo.Load(path);
+            if(path != string.Empty) repo.Load(path);
         }
 
         private void LoadBaseButton_Click(object sender, RoutedEventArgs e)

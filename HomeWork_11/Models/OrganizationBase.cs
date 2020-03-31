@@ -19,9 +19,9 @@ namespace HomeWork_11.Models
 
         public OrganizationBase()
         {
-            LoadLastState();
-            dep = null;
-            Load(currentPath);
+           // LoadLastState();
+            dep = new Department("");
+            Load("base.json");
         }
 
 
@@ -34,26 +34,37 @@ namespace HomeWork_11.Models
         public void Load(string path)
         {
             currentPath = path;
-            dep = JsonConvert.DeserializeObject<Department>(path);
+            string json;
+            using (StreamReader sr = new StreamReader(path))
+            {
+                json = sr.ReadToEnd();
+            }
+
+            dep = JsonConvert.DeserializeObject<Department>(json, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            });
             IsSaved = true;
         }
 
         public void Save()
         {
-            string serDep = JsonConvert.SerializeObject(dep);
+            var jset = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
+            string json = JsonConvert.SerializeObject(dep, Formatting.Indented, jset);
             if (currentPath == string.Empty)
             {
                 currentPath = "base.json";
-                using (StreamWriter sw = new StreamWriter(currentPath))
+                
+                using (StreamWriter sw = new StreamWriter("base.json"))
                 {
-                    sw.WriteLine(serDep);
+                    sw.WriteLine(json);
                 }
             }
             else
             {
                 using (StreamWriter sw = new StreamWriter(currentPath))
                 {
-                    sw.WriteLine(serDep);
+                    sw.WriteLine(json);
                 }
             }
         
@@ -62,11 +73,12 @@ namespace HomeWork_11.Models
 
         public void Save(string path)
         {
-            string serDep = JsonConvert.SerializeObject(dep);
+            var jset = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
+            string json = JsonConvert.SerializeObject(dep, Formatting.Indented, jset);
 
             using (StreamWriter sw = new StreamWriter(path))
             {
-                sw.WriteLine(serDep);
+                sw.WriteLine(json);
             }
             IsSaved = true;
         }
