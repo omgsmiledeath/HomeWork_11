@@ -20,12 +20,19 @@ namespace HomeWork_11
     partial class AddEmployee : Window
     {
         private Department dep;
-
+        private Employee worker;
         public AddEmployee(Department dep)
         {
             InitializeComponent();
             this.Dep = dep;
 
+        }
+
+        public AddEmployee(Department dep,Employee worker)
+        {
+            InitializeComponent();
+            this.Dep = dep;
+            this.worker = worker;
         }
 
 
@@ -101,7 +108,19 @@ namespace HomeWork_11
 
  
 
-      
+        private void EditModeFillFields()
+        {
+            LnameBox.Text = worker.First_Name;
+            FnameBox.Text = worker.Last_Name;
+            PostBox.Text = worker.Post;
+            AgeBox.Text = $"{worker.Age}";
+            EmplDateBox.Text = $"{worker.EmploymentDate}";
+            
+            if(worker is Manager)
+            {
+
+            }
+        }
 
         private void EmplTypes_DropDownClosed(object sender, EventArgs e)
         {

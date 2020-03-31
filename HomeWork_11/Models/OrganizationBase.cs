@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Newtonsoft.Json;
 using System.IO;
 namespace HomeWork_11.Models
@@ -19,17 +15,17 @@ namespace HomeWork_11.Models
 
         public OrganizationBase()
         {
-           // LoadLastState();
+
             dep = new Department("");
             Load("base.json");
         }
 
-
-        private void LoadLastState()
+        public OrganizationBase(string path)
         {
-            var oldBase = JsonConvert.DeserializeObject<OrganizationBase>("base.json");
-            this.currentPath = oldBase.currentPath;
+            dep = new Department("");
+            Load(path);
         }
+
 
         public void Load(string path)
         {
@@ -51,7 +47,7 @@ namespace HomeWork_11.Models
         {
             var jset = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
             string json = JsonConvert.SerializeObject(dep, Formatting.Indented, jset);
-            if (currentPath == string.Empty)
+            if (currentPath == string.Empty || currentPath =="base.json")
             {
                 currentPath = "base.json";
                 
@@ -66,6 +62,7 @@ namespace HomeWork_11.Models
                 {
                     sw.WriteLine(json);
                 }
+                File.Copy(currentPath, "base.json", true);
             }
         
             IsSaved = true;
@@ -80,6 +77,8 @@ namespace HomeWork_11.Models
             {
                 sw.WriteLine(json);
             }
+
+            File.Copy(path, "base.json", true);
             IsSaved = true;
         }
 

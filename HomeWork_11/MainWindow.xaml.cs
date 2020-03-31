@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using HomeWork_11.Models;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -33,8 +22,7 @@ namespace HomeWork_11
         public MainWindow()
         {
             InitializeComponent();
-            repo = new OrganizationBase();
-            organization = repo.GetOrganization();
+            BaseCheck();
         }
         #endregion
 
@@ -45,11 +33,26 @@ namespace HomeWork_11
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-             
-
             mainorg_expanded();
-                      
-           
+        }
+
+        private void BaseCheck()
+        {
+            if(File.Exists("base.json"))
+            {
+                repo = new OrganizationBase();
+                organization = repo.GetOrganization();
+            }
+            else
+            {
+                MessageBox.Show("База в месте по умолчанию не обнаруженна, укажите путь");
+                OpenFileDialog ofd = new OpenFileDialog();
+
+                Nullable<bool> result = ofd.ShowDialog();
+                string path = ofd.FileName;
+                if (path != string.Empty)
+                    repo = new OrganizationBase(path);
+            }
         }
 
         private void mainorg_expanded()
@@ -191,6 +194,7 @@ namespace HomeWork_11
                 Owner = this
             };
             AddPageEmpl.Show();
+            repo.IsSaved = false;
         }
 
         private void AddDepartment_Click(object sender, RoutedEventArgs e)
@@ -218,7 +222,7 @@ namespace HomeWork_11
                     CurrentTree.IsExpanded = true;
                 }
             }
-
+            repo.IsSaved = false;
         }
 
         private void DelWorkerButton_Click(object sender, RoutedEventArgs e)
@@ -232,6 +236,7 @@ namespace HomeWork_11
 
                 dep.Employees.Remove(selectEmployee);
             }
+            repo.IsSaved = false;
         }
 
         private void DelDepartment_Click(object sender, RoutedEventArgs e)
@@ -254,16 +259,25 @@ namespace HomeWork_11
                     MessageBox.Show("Вы собираетесь удалить всю организацию.");
                 }
             }
-            
+            repo.IsSaved = false;
+
 
         }
 
         private void CalcSalaryButton_Click(object sender, RoutedEventArgs e)
         {
-            firstHightManager(organization);
-           
-           // MessageBox.Show("Директора организации не обнаружено");
-            
+            foreach (var el in organization.Employees)
+            {
+                if (el is HighManager)
+                {
+                    el.Salary = el.CalcSalary(organization);
+                    MessageBox.Show(Convert.ToString(el.Salary));
+                    return;
+                }
+
+            }
+            foreach (var item in organization.Departments) firstHightManager(item);
+            repo.IsSaved = false;
         }
 
         private void firstHightManager(Department dep)
@@ -284,18 +298,6 @@ namespace HomeWork_11
             }
         }
 
-        private void settingsCheck()
-        {
-            
-            if(File.Exists("base.json"))
-            {
-                repo = JsonConvert.DeserializeObject<OrganizationBase>("base.json");
-            }
-            else
-            {
-                
-            }
-        }
 
         private void startFileDialogToLoad()
         {
@@ -306,6 +308,7 @@ namespace HomeWork_11
             if(path != string.Empty) repo.Load(path);
             organization = repo.GetOrganization();
             mainorg_expanded();
+            repo.IsSaved = false;
         }
 
         private void LoadBaseButton_Click(object sender, RoutedEventArgs e)
