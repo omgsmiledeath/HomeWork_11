@@ -45,17 +45,20 @@ namespace HomeWork_11
             }
             else
             {
-                MessageBox.Show("База в месте по умолчанию не обнаруженна, укажите путь");
-                OpenFileDialog ofd = new OpenFileDialog();
-
-                Nullable<bool> result = ofd.ShowDialog();
-                string path = ofd.FileName;
-                if (path != string.Empty)
-                    repo = new OrganizationBase(path);
+                MessageBox.Show("База в месте по умолчанию не обнаруженна,введите название для организации!");
+                repo = new OrganizationBase("base.json");
+                organization = repo.GetOrganization();
+                AddDepartment adddep = new AddDepartment(organization);
+   
+                if (adddep.ShowDialog() == true)
+                {
+                    mainorg_expanded();
+                }
+                
             }
         }
 
-        private void mainorg_expanded()
+        public void mainorg_expanded()
         {
             var mainItem = new TreeViewItem
             {
@@ -256,7 +259,20 @@ namespace HomeWork_11
                 }
                 else
                 {
-                    MessageBox.Show("Вы собираетесь удалить всю организацию.");
+                    choise = MessageBox.Show("Вы собираетесь удалить всю организацию.","Внимание",MessageBoxButton.YesNo);
+                    if(choise == MessageBoxResult.Yes)
+                    {
+                        organization.Departments.Clear();
+                        organization.DepartmentName = "Новый";
+                        AddDepartment adddep = new AddDepartment(organization);
+                        adddep.Owner = this;
+                        if(adddep.ShowDialog() ==true)
+                        {
+                            mainorg_expanded();
+                        }
+                        
+                        
+                    }
                 }
             }
             repo.IsSaved = false;
@@ -270,7 +286,7 @@ namespace HomeWork_11
             {
                 if (el is HighManager)
                 {
-                    el.Salary = el.CalcSalary(organization);
+                    (el as HighManager).CalcSalary(organization);
                     MessageBox.Show(Convert.ToString(el.Salary));
                     return;
                 }
@@ -344,7 +360,7 @@ namespace HomeWork_11
             SaveFileDialog sfd = new SaveFileDialog();
             Nullable<bool> result = sfd.ShowDialog();
             string path = sfd.FileName;
-            repo.Save(path);
+            if (path != string.Empty) repo.Save(path);
         }
     }
 }

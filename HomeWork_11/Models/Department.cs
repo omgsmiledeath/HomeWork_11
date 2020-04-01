@@ -36,7 +36,7 @@ namespace HomeWork_11.Models
             DepartmentName = name;
             Id = Guid.NewGuid().ToString().Substring(0, 5) + (++DepCount);
         }
-
+        
         public ObservableCollection<Employee> Employees { get => employees;}
         public ObservableCollection<Department> Departments { get => departments;}
 

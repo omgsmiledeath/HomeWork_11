@@ -17,7 +17,7 @@ namespace HomeWork_11.Models
             Department dep
             ) :base (fname,lname,post,age,emplDate)
         {
-            Salary = CalcSalary(dep);
+            CalcSalary(dep);
         }
 
         public HighManager() :base ()
@@ -53,11 +53,15 @@ namespace HomeWork_11.Models
                     }
                 }
             }
-            if(dep.Employees.Count>1)
+            if(dep.Employees.Count>0)
                 foreach(var item in dep.Employees)
                 {
-                    if (item as HighManager != this)
+                   
+                    if (!(item is HighManager))
+                    {
                         result += item.Salary;
+
+                    }
                 }
             result = result * 15 / 100;
             if (result < 1300) this.Salary = 1300;

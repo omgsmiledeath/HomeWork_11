@@ -73,7 +73,7 @@
 
                     <GridViewColumn Width="100"
                         DisplayMemberBinding="{Binding Path=Age}">
-                        <TextBlock Text="{Binding}" TextWrapping="Wrap">Возраст</TextBlock>
+                        <TextBlock Text="{Binding}" TextWrapping="Wrap">Возраст(Лет)</TextBlock>
                     </GridViewColumn>
 
                     <GridViewColumn Width="100"
@@ -84,7 +84,7 @@
 
                     <GridViewColumn Width="100"
                         DisplayMemberBinding="{Binding Path=Salary}">
-                        <TextBlock Text="{Binding}" TextWrapping="Wrap">Зарплата</TextBlock>
+                        <TextBlock Text="{Binding}" TextWrapping="Wrap">Зарплата($)</TextBlock>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>

@@ -15,15 +15,14 @@ namespace HomeWork_11.Models
 
         public OrganizationBase()
         {
-
-            dep = new Department("");
             Load("base.json");
         }
 
         public OrganizationBase(string path)
         {
-            dep = new Department("");
+            //dep = new Department("");
             Load(path);
+            if (dep == null) dep = new Department("");
         }
 
 
@@ -31,8 +30,9 @@ namespace HomeWork_11.Models
         {
             currentPath = path;
             string json;
-            using (StreamReader sr = new StreamReader(path))
+            using (Stream st = File.Open(path, FileMode.OpenOrCreate))
             {
+                StreamReader sr = new StreamReader(st);
                 json = sr.ReadToEnd();
             }
 

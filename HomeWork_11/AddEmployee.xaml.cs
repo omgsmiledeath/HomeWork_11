@@ -28,12 +28,7 @@ namespace HomeWork_11
 
         }
 
-        public AddEmployee(Department dep,Employee worker)
-        {
-            InitializeComponent();
-            this.Dep = dep;
-            this.worker = worker;
-        }
+       
 
 
         internal Department Dep { get => dep; set => dep = value; }
@@ -106,21 +101,6 @@ namespace HomeWork_11
             return new HighManager(fname,lname,post,age,empldate,dep);
         }
 
- 
-
-        private void EditModeFillFields()
-        {
-            LnameBox.Text = worker.First_Name;
-            FnameBox.Text = worker.Last_Name;
-            PostBox.Text = worker.Post;
-            AgeBox.Text = $"{worker.Age}";
-            EmplDateBox.Text = $"{worker.EmploymentDate}";
-            
-            if(worker is Manager)
-            {
-
-            }
-        }
 
         private void EmplTypes_DropDownClosed(object sender, EventArgs e)
         {
@@ -149,6 +129,9 @@ namespace HomeWork_11
             }
         }
 
+        private void EditEmployeeButton_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }
