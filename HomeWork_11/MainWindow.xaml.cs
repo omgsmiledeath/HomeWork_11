@@ -44,8 +44,9 @@ namespace HomeWork_11
             {
                 repo = new OrganizationBase();
                 //repo.RandomBaseGenerator();
-                //CalcSalary();
+                
                 organization = repo.GetOrganization();
+                //CalcSalary();
             }
             else
             {

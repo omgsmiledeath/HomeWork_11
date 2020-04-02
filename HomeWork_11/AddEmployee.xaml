@@ -59,11 +59,11 @@
 
                 
             </ComboBox>
-            <TextBlock Margin="5,15,0,5" HorizontalAlignment="Left" Width="173" Height="21">Фамилия</TextBlock>
-            <TextBlock Margin="5,15,5,5" >Имя</TextBlock>
-            <TextBlock Margin="5,15,5,5" >Пост</TextBlock>
-            <TextBlock Margin="5,10,5,5" >Возраст</TextBlock>
-            <TextBlock Margin="5,15,5,5" >Количество рабочих часов</TextBlock>
+            <TextBlock Margin="5,15,5,0" HorizontalAlignment="Left" Width="173" Height="21">Фамилия</TextBlock>
+            <TextBlock Margin="5,10,5,0" >Имя</TextBlock>
+            <TextBlock Margin="5,15,5,0" >Пост</TextBlock>
+            <TextBlock Margin="5,10,5,0" >Возраст</TextBlock>
+            <TextBlock Margin="5,20,5,5" >Количество рабочих часов</TextBlock>
             <TextBlock Margin="5,15,5,5" >Оплата за час</TextBlock>
             <TextBlock Margin="5,15,5,5" >Дата приема на работу</TextBlock>
             <TextBlock Margin="5,15,5,5" >Конец интернатуры</TextBlock>
