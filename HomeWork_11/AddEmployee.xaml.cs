@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using HomeWork_11.Models;
 namespace HomeWork_11
 {
@@ -19,44 +8,94 @@ namespace HomeWork_11
     /// </summary>
     partial class AddEmployee : Window
     {
-        private Department dep;
-        private Employee worker;
+
+        private Department dep; //хранит департамент в котором добавляется сотрудник
+
+        /// <summary>
+        /// Конструктор окна добавления работника
+        /// </summary>
+        /// <param name="dep"></param>
         public AddEmployee(Department dep)
         {
             InitializeComponent();
-            this.Dep = dep;
+            this.dep = dep;
 
         }
 
-       
-
-
-        internal Department Dep { get => dep; set => dep = value; }
-
+        /// <summary>
+        /// Метод нажатия по кнопке добавления работника
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddEmployee_Click(object sender, RoutedEventArgs e)
         {
             Employee result = null;
+            if (CheckBoxes())
+            {
+                switch (EmplTypes.Text)
+                {
+                    case "Менеджер":
+
+                        result = getManager();
+                        dep.AddWorker(result);
+                        break;
+                    case "Высший менеджер":
+                        result = getHighManager();
+                        dep.AddWorker(result);
+                        break;
+                    default:
+                        result = getInternt();
+                        dep.AddWorker(result);
+                        break;
+
+                }
+                this.Close();
+            }
+            
+            
+        }
+
+        /// <summary>
+        /// Метод проверки текстовых полей на заполненность
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckBoxes()
+        {
+            if(LnameBox.Text==String.Empty|| FnameBox.Text == String.Empty || AgeBox.Text ==String.Empty ||
+                EmplDateBox.Text == string.Empty)
+            {
+                MessageBox.Show("Заполните все поля");
+                return false;
+            }
+            
             switch (EmplTypes.Text)
             {
                 case "Менеджер":
-                    result = getManager();
-                    Dep.AddWorker(result);
-                    break;
+                    if (PostBox.Text==string.Empty || WorkHBox.Text==string.Empty|| PaymentBox.Text==string.Empty )
+                    {
+                        MessageBox.Show("Заполните все поля");
+                        return false;
+                    }
+                        break;
                 case "Высший менеджер":
-                    result = getHighManager();
-                    Dep.AddWorker(result);
+                    if (PostBox.Text == string.Empty)
+                    {
+                        MessageBox.Show("Заполните все поля");
+                        return false;
+                    }
                     break;
                 default:
-                    result = getInternt();
-                    Dep.AddWorker(result);
+                    if ( EndOfInternDate.Text == string.Empty)
+                    {
+                        MessageBox.Show("Заполните все поля");
+                        return false;
+                    }
                     break;
-
+                    
             }
+            return true;
 
-            
-            this.Close();
         }
-
 
         /// <summary>
         /// Метод для получения данных и формирования экземпляра класса Менеджер
@@ -101,7 +140,11 @@ namespace HomeWork_11
             return new HighManager(fname,lname,post,age,empldate,dep);
         }
 
-
+        /// <summary>
+        /// Отображение нужных полей по выбору типа сотрудника
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EmplTypes_DropDownClosed(object sender, EventArgs e)
         {
             if (EmplTypes.Text == "Интерн")
@@ -129,9 +172,6 @@ namespace HomeWork_11
             }
         }
 
-        private void EditEmployeeButton_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }

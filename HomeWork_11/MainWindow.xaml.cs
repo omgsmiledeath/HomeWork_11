@@ -362,5 +362,23 @@ namespace HomeWork_11
             string path = sfd.FileName;
             if (path != string.Empty) repo.Save(path);
         }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (repo.IsSaved == false)
+            {
+                var choise = MessageBox.Show("Хотите сохранить изменения в текущей базе?", "Внимание", MessageBoxButton.YesNo);
+                if (choise == MessageBoxResult.Yes)
+                {
+                    repo.Save();
+                }
+            }
+                    this.Close();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
     }
 }

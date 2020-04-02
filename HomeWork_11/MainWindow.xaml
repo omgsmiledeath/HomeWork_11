@@ -13,7 +13,9 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         xmlns:local="clr-namespace:HomeWork_11"
         mc:Ignorable="d"
-        Title="MainWindow" Height="473.03" Width="1200" Loaded="Window_Loaded">
+        Title="MainWindow" Height="473.03" Width="1200"
+        MinWidth="1200" MinHeight="450"
+ Loaded="Window_Loaded" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="167*"/>
@@ -162,8 +164,13 @@
                 <materialDesign:PackIcon Kind="FolderUploadOutline" />
             </Button>
 
-
+            
 
         </StackPanel>
+        <Button Grid.Column="2" x:Name="ExitButton" Background="{x:Null}"
+                    BorderBrush="{x:Null}" 
+                    Click="ExitButton_Click" HorizontalAlignment="Right" >
+            <materialDesign:PackIcon Kind="ExitToApp" />
+        </Button>
     </Grid>
 </Window>

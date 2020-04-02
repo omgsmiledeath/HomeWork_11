@@ -15,17 +15,16 @@ using System.Windows.Shapes;
 
 namespace HomeWork_11
 {
-    /// <summary>
-    /// Логика взаимодействия для AddDepartment.xaml
-    /// </summary>
+
     public partial class AddDepartment : Window
     {
-        Department dep;
+        Department dep; //хранение переменной в кторою добавляется департамент
+
         public AddDepartment()
         {
             InitializeComponent();
         }
-
+        //конструктор 
         public AddDepartment(Department dep)
         {
             InitializeComponent();

@@ -12,8 +12,23 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         xmlns:local="clr-namespace:HomeWork_11"
+        xmlns:models="clr-namespace:HomeWork_11.Models"
         mc:Ignorable="d"
         Title="Добавление сотрудника в отдел" Height="450" Width="800" >
+
+    <Window.Resources>
+        <ControlTemplate x:Key="validationFailed">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="Violet" BorderThickness="2">
+                    <AdornedElementPlaceholder />
+                </Border>
+                <TextBlock Foreground="Red" FontSize="26" FontWeight="Bold">!</TextBlock>
+            </StackPanel>
+        </ControlTemplate>
+    </Window.Resources>
+
+   
+    
     <Grid>
         <Grid.ColumnDefinitions>
 
@@ -60,7 +75,10 @@
             <TextBox x:Name="LnameBox" 
                      HorizontalAlignment="Center" 
                      Margin="5,8,5,5" 
-                     Width="174"/>
+                     Width="174" 
+                     Validation.ErrorTemplate="{StaticResource validationFailed}">
+                
+            </TextBox>
             <TextBox x:Name="FnameBox"
                      HorizontalAlignment="Center" 
                       Width="174"
