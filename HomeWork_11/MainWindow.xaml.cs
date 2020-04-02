@@ -13,8 +13,8 @@ namespace HomeWork_11
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Department organization;
-        private OrganizationBase repo;
+        private Department organization; // Экземпляр всей организации
+        private OrganizationBase repo; // экземпляр базы для сохранения и загрузок
         #region Конструктор
         /// <summary>
         /// При запуске приложения
@@ -35,12 +35,16 @@ namespace HomeWork_11
         {
             mainorg_expanded();
         }
-
+        /// <summary>
+        /// Метод для проверки наличая базы при старте программы
+        /// </summary>
         private void BaseCheck()
         {
             if(File.Exists("base.json"))
             {
                 repo = new OrganizationBase();
+                //repo.RandomBaseGenerator();
+                //CalcSalary();
                 organization = repo.GetOrganization();
             }
             else
@@ -57,7 +61,9 @@ namespace HomeWork_11
                 
             }
         }
-
+        /// <summary>
+        /// Метод заполнения и установок для TreeView главного элемента
+        /// </summary>
         public void mainorg_expanded()
         {
             var mainItem = new TreeViewItem
@@ -91,7 +97,11 @@ namespace HomeWork_11
             }
         }
 
-
+        /// <summary>
+        /// Метод отвечающий за обработку сворачивания ветвей TreeView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void org_colapsed(object sender, RoutedEventArgs e)
         {
             TreeViewItem item = (TreeViewItem)e.Source;
@@ -100,7 +110,11 @@ namespace HomeWork_11
             item.Items.Clear();
             item.Items.Add(null);
         }
-
+        /// <summary>
+        /// Метод отвечающий за обработку разворачиваний ветвей TreeView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void org_expanded(object sender, RoutedEventArgs e)
         {
             TreeViewItem item = new TreeViewItem();
@@ -132,47 +146,12 @@ namespace HomeWork_11
                 }   
         }
 
-        private void fillDepartment()
-        {
-            organization = new Department("ОГКУ ДИРЕКЦИЯ АВТОДОРОГ");
-            organization.AddWorker(new HighManager());
-            organization.AddSubDepartment(new Department("Отдел МТО"));
-
-            organization.AddSubDepartment(new Department("Отдел МТО2"));
-
-
-            organization.AddSubDepartment(new Department("Отдел МТО3"));
-            organization.AddSubDepartment(new Department("Отдел МТО4"));
-            organization.AddSubDepartment(new Department("Отдел МТО5"));
-            organization.AddSubDepartment(new Department("Отдел МТО6"));
-            organization.AddSubDepartment(new Department("Отдел МТО7"));
-            foreach (var item in organization.Departments)
-            {
-                item.AddWorker(new Manager());
-                item.AddWorker(new HighManager());
-                item.AddWorker(new Manager());
-                item.AddSubDepartment(new Department("Отдел Олега"));
-                item.Departments[0].AddWorker(new Manager());
-
-            }
-            organization.Departments[1].Departments[0].AddSubDepartment(new Department("Еще отдел олега"));
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-            organization.Departments[1].Departments[0].AddWorker(new Manager());
-
-            var jset = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
-            string json = JsonConvert.SerializeObject(organization, Formatting.Indented, jset);
-            using (StreamWriter sw = new StreamWriter("base.json"))
-            {
-                sw.WriteLine(json);
-            }
-
-        }
-
+        
+        /// <summary>
+        /// Метод который при выборе ветви , получает текущий департамент
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OrganizationTree_Selected(object sender, RoutedEventArgs e)
         {
             var item = (TreeViewItem)e.OriginalSource;
@@ -183,7 +162,11 @@ namespace HomeWork_11
             txt1.DataContext = dep;
 
         }
-
+        /// <summary>
+        /// Метод обрабатывающий нажатие по кнопке и вызов окна добавления работника
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddWorkerButton_Click(object sender, RoutedEventArgs e)
         {
             Department dep = new Department(null);
@@ -199,7 +182,11 @@ namespace HomeWork_11
             AddPageEmpl.Show();
             repo.IsSaved = false;
         }
-
+        /// <summary>
+        /// Метод обрабатывающий нажатие по кнопке и добавление департамента
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddDepartment_Click(object sender, RoutedEventArgs e)
         {
 
@@ -227,7 +214,11 @@ namespace HomeWork_11
             }
             repo.IsSaved = false;
         }
-
+        /// <summary>
+        /// Удаление работника из отдела
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DelWorkerButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -241,7 +232,11 @@ namespace HomeWork_11
             }
             repo.IsSaved = false;
         }
-
+        /// <summary>
+        /// Удаление департамента
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DelDepartment_Click(object sender, RoutedEventArgs e)
         {
 
@@ -279,21 +274,32 @@ namespace HomeWork_11
 
 
         }
-
+        /// <summary>
+        /// Метод обработки нажатия по клавище подсчета ЗП у начальников
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CalcSalaryButton_Click(object sender, RoutedEventArgs e)
+        {
+            CalcSalary();
+           // foreach (var item in organization.Departments) firstHightManager(item);
+            repo.IsSaved = false;
+        }
+        /// <summary>
+        /// Подсчет зп у начальников организации
+        /// </summary>
+        private void CalcSalary()
         {
             foreach (var el in organization.Employees)
             {
                 if (el is HighManager)
                 {
                     (el as HighManager).CalcSalary(organization);
-                    MessageBox.Show(Convert.ToString(el.Salary));
+                    // MessageBox.Show(Convert.ToString(el.Salary));
                     return;
                 }
 
             }
-            foreach (var item in organization.Departments) firstHightManager(item);
-            repo.IsSaved = false;
         }
 
         private void firstHightManager(Department dep)
@@ -305,7 +311,7 @@ namespace HomeWork_11
                     if (el is HighManager)
                     {
                         el.Salary = el.CalcSalary(organization);
-                        MessageBox.Show(Convert.ToString(el.Salary));
+                       // MessageBox.Show(Convert.ToString(el.Salary));
                         return;
                     }
 

@@ -37,36 +37,23 @@ namespace HomeWork_11.Models
                     {
                         if (worker is HighManager)
                         {
-                            var temp = worker.CalcSalary(item);
-
-                            if (temp < 1300)
-                                result += 1300;
-                            else result += temp;
+                            result += (worker as HighManager).CalcSalary(item);
                         }
-                        
-                        if(!(worker is HighManager))
-                        {
-                            result += worker.Salary;
-
-                        }
-                        
                     }
                 }
             }
-            if(dep.Employees.Count>0)
-                foreach(var item in dep.Employees)
+            if (dep.Employees.Count > 1)
+                foreach (var item in dep.Employees)
                 {
-                   
-                    if (!(item is HighManager))
+                    if (!(item is HighManager) || (item is Manager) || (item is Intern))
                     {
                         result += item.Salary;
-
                     }
+                    
                 }
-            result = result * 15 / 100;
-            if (result < 1300) this.Salary = 1300;
-            else this.Salary = result;
-            return result;
+            if (result*15/100 < 1300) Salary = 1300;
+            else  Salary = result*15/100;
+            return result + this.Salary;
         }
     }
 }
